@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" href="adminDashboard.css">
+    </head>
+    <body>
+	<button class="logout">Log Out</button>
+        <h1>Welcome to Admin Dashboard !</h1>
+        <form class="options">
+            <div class="common"><button class="btn" onclick="redirect(event);">Student</button>
+            </div>
+            <div class="common">
+              <button class="btn">Create<br>Test</button>
+            </div>
+            <div class="common">
+              <button class="btn">Add/<br>Remove Course</button>
+            </div>
+          </form>
+        <script>
+        function redirect(event) {
+       	   event.preventDefault(); // prevent the event , ie form submit event
+       	   window.location.href = "student_db.jsp";
+        }
+        </script>
+    </body>
+</html>
