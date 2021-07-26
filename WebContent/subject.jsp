@@ -9,30 +9,26 @@
 </head>
 <body>
 <button onclick="window.location.href='admin_dashboard.html';">Back</button>
-<form action="addStudent.jsp">
-<button>Add Student</button></form>
+<form action="addSubject.jsp">
+<button>Add Subject</button>
+</form>
 	<%!
-		private static final String SELECT_ALL_STUDENT = "SELECT * FROM STUDENT";
+		private static final String SELECT_ALL_SUBJECT = "SELECT * FROM subjects";
 	%>
 	<%
 		LoginDao obj = new LoginDao();
 		Connection con = obj.connect();
-		PreparedStatement st = con.prepareStatement(SELECT_ALL_STUDENT);
+		PreparedStatement st = con.prepareStatement(SELECT_ALL_SUBJECT);
 		ResultSet rs = st.executeQuery();
-		RequestDispatcher rd = request.getRequestDispatcher("student_db.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("subject.jsp");
 		while(rs.next()){
-			request.setAttribute("name", rs.getString("name"));
-			request.setAttribute("id", rs.getInt("id"));
-			request.setAttribute("DOB", rs.getString("DOB"));
-			request.setAttribute("phone", rs.getString("phone_no"));
+			request.setAttribute("sname", rs.getString("sname"));
+			request.setAttribute("sid", rs.getInt("sid"));
 	%>
-		<c:out value = "${name}"/>
-		<form action="deleteStudent">
-			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+		<c:out value = "${sname}"/>
+		<form action="deleteSubject">
+			<input type="hidden" name="sid" value="<%= request.getAttribute("sid") %>" />
 			<button>Delete</button>
-		</form>
-		<form action="updateStudent.jsp">
-			<button>Update</button>
 		</form>
 	<%
 		}
