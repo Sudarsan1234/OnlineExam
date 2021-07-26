@@ -1,0 +1,32 @@
+create database examdb;
+
+create table admin(id int primary key auto_increment, 
+                   name varchar(25), 
+                   username varchar(20) not null,
+                   phone_no varchar(10),
+                   password varchar(20) not null);
+                   
+create table student(id int primary key auto_increment,
+                     name varchar(25),
+                     phone_no varchar(10),
+                     DOB date not null,
+                     password date not null);
+                     
+create table subjects(sid int primary key auto_increment,
+                      sname varchar(15));
+                      
+create table questions(qid int primary key auto_increment,
+                       sname varchar(15) references subjects(sname),
+                       ques varchar(100) not null,
+                       correct char not null,
+                       op1 varchar(20),
+                       op2 varchar(20),
+                       op3 varchar(20),
+                       op4 varchar(20),
+                       user_op char not null);
+                       
+insert into admin(name, username, phone_no, password) values("Rishi", "RKumar", "9876543210", "RishiKumar");
+
+insert into students(name, phone_no, DOB, password) values("Rishikesh", "9874563210", "2000-10-08", "2000-10-08");
+
+insert into subjects(sname) values("Java"), ("DBMS"), ("OS"), ("DAA");
