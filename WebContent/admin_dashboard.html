@@ -5,23 +5,33 @@
         <link rel="stylesheet" href="adminDashboard.css">
     </head>
     <body>
-	<button class="logout">Log Out</button>
+	<button class="logout" onclick="logout(event);">Log Out</button>
         <h1>Welcome to Admin Dashboard !</h1>
         <form class="options">
-            <div class="common"><button class="btn" onclick="redirect(event);">Student</button>
+            <div class="common"><button class="btn" onclick="redirect1(event);">Student</button>
             </div>
             <div class="common">
               <button class="btn">Create<br>Test</button>
             </div>
-            <div class="common">
+            <div class="common" onclick="redirect2(event);">
               <button class="btn">Add/<br>Remove Course</button>
             </div>
           </form>
         <script>
-        function redirect(event) {
+        function logout(event){
+        	if(window.confirm("Sure, you want to LogOut?")){
+        		window.location.href="login1.html";
+        		window.alert("LogOut Successful!!");
+        	}
+        }
+        function redirect1(event) {
        	   event.preventDefault(); // prevent the event , ie form submit event
        	   window.location.href = "student_db.jsp";
         }
+        function redirect2(event) {
+        	   event.preventDefault(); // prevent the event , ie form submit event
+        	   window.location.href = "subject.jsp";
+         }
         </script>
     </body>
 </html>
