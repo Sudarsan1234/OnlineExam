@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="stud_dashboard.css">
   </head>
   <body>
-      <button class="logout">Log Out</button>
+  <button class="logout" onclick="logout(event);">Log Out</button>
       <h1 class="heading">Welcome to student dashboard</h1>
       
     <form class="options" action="POST">
@@ -22,5 +22,13 @@
         <button class="btn">Check Result</button>
       </div>
     </form>
+    <script>
+        function logout(event){
+        	if(window.confirm("Sure, you want to LogOut?")){
+        		window.location.href="login1.html";
+        		window.alert("LogOut Successful!!");
+        	}
+        }
+    </script>
   </body>
 </html>
