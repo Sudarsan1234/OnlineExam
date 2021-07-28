@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="com.onlineexam.main.*" import = "java.sql.*" import = "java.util.*"%>
+    pageEncoding="ISO-8859-1" import="com.onlineexam.bean.*" import="com.onlineexam.Dao.*" import = "java.sql.*" import = "java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,28 +10,25 @@
 <body>
 <button onclick="window.location.href='admin_dashboard.html';">Back</button>
 <form action="addStudent.jsp">
-<button>Add Student</button></form>
+<button>Add Student</button>
+</form>
 	<%!
 		private static final String SELECT_ALL_STUDENT = "SELECT * FROM STUDENT";
 	%>
 	<%
-		LoginDao obj = new LoginDao();
-		Connection con = obj.connect();
-		PreparedStatement st = con.prepareStatement(SELECT_ALL_STUDENT);
-		ResultSet rs = st.executeQuery();
-		RequestDispatcher rd = request.getRequestDispatcher("student_db.jsp");
-		while(rs.next()){
-			request.setAttribute("name", rs.getString("name"));
-			request.setAttribute("id", rs.getInt("id"));
-			request.setAttribute("DOB", rs.getString("DOB"));
-			request.setAttribute("phone", rs.getString("phone_no"));
+		StudentDao obj = new StudentDao();
+		List<Student> list = obj.selectAllStudents();
+		for(Student st:list){
 	%>
-		<c:out value = "${name}"/>
+		<c:out value = "<%= st.getName() %>"/>
+		<c:out value = "<%= st.getDOB() %>"/>
+		<c:out value = "<%= st.getPhone() %>"/>
 		<form action="deleteStudent">
-			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+			<input type="hidden" name="id" value="<%= st.getId() %>" />
 			<button>Delete</button>
 		</form>
 		<form action="updateStudent.jsp">
+			<input type="hidden" name="id" value="<%= st.getId() %>" />
 			<button>Update</button>
 		</form>
 	<%

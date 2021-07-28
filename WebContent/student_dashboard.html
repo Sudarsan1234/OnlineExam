@@ -8,9 +8,9 @@
   <button class="logout" onclick="logout(event);">Log Out</button>
       <h1 class="heading">Welcome to student dashboard</h1>
       
-    <form class="options" action="POST">
+    <form class="options">
       <div class="common">
-        <button class="btn">Check Profile</button>
+        <button class="btn" onclick="redirect1(event);">Check Profile</button>
       </div>
       <div class="common">
         <button class="btn">Update details</button>
@@ -23,6 +23,10 @@
       </div>
     </form>
     <script>
+	    function redirect1(event) {
+	    	   event.preventDefault(); // prevent the event , ie form submit event
+	    	   window.location.href = "studentProfile.jsp";
+	     }
         function logout(event){
         	if(window.confirm("Sure, you want to LogOut?")){
         		window.location.href="login1.html";
