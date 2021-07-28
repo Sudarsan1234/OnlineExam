@@ -19,7 +19,7 @@ public class StudentDao {
 	private static final String SELECT_Student_BY_ID = "SELECT id, name, phone_no, DOB FROM student WHERE id = ?;";
 	private static final String SELECT_ALL_Student = "SELECT * FROM student;";
 	private static final String DELETE_Student_SQL = "DELETE FROM student WHERE id = ?;";
-	private static final String UPDATE_Student_SQL = "UPDATE student SET name = ?, phone_no = ?, DOB = ? where id = ?;";
+	private static final String UPDATE_Student_SQL = "UPDATE student SET name = ?, phone_no = ?, DOB = ?, password = ? where id = ?;";
 
 	protected Connection getConnection(){
 		Connection con = null;
@@ -77,9 +77,8 @@ public class StudentDao {
 			prst.setInt(1, id);
 			System.out.println(prst);
 			ResultSet rs = prst.executeQuery();
-			while(rs.next()){
-				Student = new Student(id, rs.getString("name"), rs.getString("email"), rs.getString("country"));
-			}
+			rs.next();
+			Student = new Student(id, rs.getString("name"), rs.getString("DOB"), rs.getString("phone_no"));
 		}catch(SQLException e){
 			printSQLException(e);
 		}
@@ -94,7 +93,7 @@ public class StudentDao {
 			System.out.println(prst);
 			ResultSet rs = prst.executeQuery();
 			while(rs.next()){
-				Students.add(new Student(rs.getString("name"), rs.getString("phone_no"), rs.getString("country")));
+				Students.add(new Student(rs.getInt("id"), rs.getString("name"), rs.getString("phone_no"), rs.getString("DOB")));
 			}
 		}catch(SQLException e){
 			printSQLException(e);
@@ -102,15 +101,16 @@ public class StudentDao {
 		return Students;
 	}
 	// update Student
-	public boolean updateStudent(Student Student) throws SQLException{
+	public boolean updateStudent(Student st) throws SQLException{
 		boolean rowUpdated;
 		Connection con = getConnection();
 		PreparedStatement prst = con.prepareStatement(UPDATE_Student_SQL);
+		prst.setString(1, st.getName());
+		prst.setString(2, st.getPhone());
+		prst.setString(3, st.getDOB());
+		prst.setString(4, st.getDOB());
+		prst.setInt(5, st.getId());
 		System.out.println("updateStudent: " + prst);
-		prst.setString(1, Student.getName());
-		prst.setString(2, Student.getPhone());
-		prst.setString(3, Student.getDOB());
-		prst.setInt(4, Student.getId());
 		rowUpdated = prst.executeUpdate() > 0;
 		return rowUpdated;
 	}
