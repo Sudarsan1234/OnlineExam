@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.onlineexam.Dao.LoginDao;
+
 @WebServlet("/admin")
 public class Admin {
 	private String name;
