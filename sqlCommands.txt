@@ -16,7 +16,7 @@ create table subjects(sid int primary key auto_increment,
                       sname varchar(15));
                       
 create table questions(qid int primary key auto_increment,
-                       sname varchar(15) references subjects(sname),
+                       sid int references subjects(sid),
                        ques varchar(100) not null,
                        correct char not null,
                        op1 varchar(20),
@@ -30,3 +30,6 @@ insert into admin(name, username, phone_no, password) values("Rishi", "RKumar", 
 insert into students(name, phone_no, DOB, password) values("Rishikesh", "9874563210", "2000-10-08", "2000-10-08");
 
 insert into subjects(sname) values("Java"), ("DBMS"), ("OS"), ("DAA");
+
+create table test(tid int primary key auto_increment, sid int);
+ALTER TABLE test ADD CONSTRAINT FK_SID FOREIGN KEY(sid) REFERENCES subjects(sid);
